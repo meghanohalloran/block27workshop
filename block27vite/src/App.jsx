@@ -1,7 +1,8 @@
-import Authenticate from "./authenticate";
-import SignUpForm from "./signupform";
-import { useEffect } from "react";
+
+// import { useEffect } from "react";
 import { useState } from "react";
+import '.index.css';
+
 
 
 
