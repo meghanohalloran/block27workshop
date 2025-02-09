@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import './index.css';
 
-const SignUpForm = ({ setToken }) => {
+const SignUpForm = ({ setToken, token }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -26,16 +28,27 @@ const SignUpForm = ({ setToken }) => {
 
   const handleClick = async () => {
     try {
-      console.log("Authenticate button clicked");
+      const response = await fetch('https://fsa-jwt-practice.herokuapp.com/authenticate', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      
+      const result = await response.json();
+      setSuccessMessage(result.message);
+      console.log(result);
     } catch (err) {
       setError(err.message);
     }
   };
 
   return (
-    <div>
+    <div className="form-container">
       <h2>Sign Up</h2>
-      {error && <p>{error}</p>}
+      {error && <p className="error-message">{error}</p>}
+      {successMessage && <p className="success-message">{successMessage}</p>}
       <form onSubmit={handleSubmit}>
         <label>
           Username:
@@ -55,9 +68,9 @@ const SignUpForm = ({ setToken }) => {
           />
         </label>
         <br />
-        <button type="submit">Submit</button>
+        <button className="submit-button" type="submit">Submit</button>
       </form>
-      <button onClick={handleClick}>Authenticate Token</button>
+      <button className="auth-button" onClick={handleClick}>Authenticate Token</button>
     </div>
   );
 };

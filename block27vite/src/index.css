@@ -1,3 +1,23 @@
 body {
   background-color: aqua;
 }
+
+h2 {
+  color:blueviolet;
+
+}
+
+actions button:hover,
+actions button:active {
+  background-color:deeppink;
+}
+
+
+.actions button {
+  font:bold;
+  color:chartreuse;
+  border: 10px solid cornflowerblue;
+  background-color:crimson;
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+}
